@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Pacote Entrega</string>
+    <string name="base">BASE</string>
+    <string name="filial">FILIAL</string>
+    <string name="nome">NOME</string>
+    <string name="codigo_usuario">CODIGO USUARIO</string>
+    <string name="nova_entrega">Nova Entrega</string>
+    <string name="search_product">Consultar Produtos</string>
+    <string name="logout">Sair</string>
+    <string name="retira_f_cil_cpf">Retira Fácil+CPF</string>
+    <string name="entrega_por_pr_venda">Entrega por pré-venda</string>
+    <string name="new_delivery">Nova Entrega</string>
+    <string name="settings">Settings</string>
+    <string name="usu_rio">Usuário</string>
+    <string name="senha">Senha</string>
+    <string name="entrar">Entrar</string>
+    <string name="login_input_layout_erro_codigo_invalido">Código inválido</string>
+    <string name="login_input_layout_erro_senha_invalida">Senha inválida</string>
+</resources>
