@@ -1,4 +1,4 @@
-package com.example.pacoteentrega.ui
+package com.example.pacoteentrega.view
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Menu

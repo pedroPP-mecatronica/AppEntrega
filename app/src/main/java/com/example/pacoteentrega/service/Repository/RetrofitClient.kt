@@ -1,4 +1,4 @@
-package com.example.pacoteentrega.infra
+package com.example.pacoteentrega.service.Repository
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -9,11 +9,11 @@ class RetrofitClient private constructor() {
         //singleton
         companion object {
             private lateinit var retrofit: Retrofit
-            private val baseUrl = "http://sistema.havan.com.br/AutenticacaoApi/oauth/"
+            private val baseUrl = "https://sistema.havan.com.br/AutenticacaoApi/"
 
             private fun getRetrofitInstance(): Retrofit {
                 var httpClient = OkHttpClient.Builder()
-                if (!::retrofit.isInitialized) {
+                if (!Companion::retrofit.isInitialized) {
                     retrofit = Retrofit.Builder()
                         .baseUrl(baseUrl)
                         .client(httpClient.build())
