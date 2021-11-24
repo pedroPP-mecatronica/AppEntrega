@@ -1,4 +1,4 @@
-package com.example.pacoteentrega.service.Repository
+package com.example.pacoteentrega.service.Repository.remote
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

@@ -1,4 +1,4 @@
-package com.example.pacoteentrega.service.Repository
+package com.example.pacoteentrega.service.Repository.remote
 import com.example.pacoteentrega.service.models.LoginModel
 import retrofit2.Call
 import retrofit2.Response

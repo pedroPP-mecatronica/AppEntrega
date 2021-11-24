@@ -1,7 +1,7 @@
 package com.example.pacoteentrega.service
 
-import com.example.pacoteentrega.service.Repository.LoginService
-import com.example.pacoteentrega.service.Repository.RetrofitClient
+import com.example.pacoteentrega.service.Repository.remote.LoginService
+import com.example.pacoteentrega.service.Repository.remote.RetrofitClient
 import com.example.pacoteentrega.service.listener.APIListener
 import com.example.pacoteentrega.service.models.LoginModel
 import retrofit2.Call

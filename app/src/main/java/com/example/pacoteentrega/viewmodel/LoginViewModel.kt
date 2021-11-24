@@ -1,18 +1,23 @@
 package com.example.pacoteentrega.viewmodel
 
 import android.app.Application
+import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.example.pacoteentrega.service.LoginRepository
-import com.example.pacoteentrega.service.Repository.LoginService
-import com.example.pacoteentrega.service.Repository.RetrofitClient
+import com.example.pacoteentrega.service.Repository.local.SecurityPreferences
 import com.example.pacoteentrega.service.listener.APIListener
 import com.example.pacoteentrega.service.models.LoginModel
+import com.google.android.material.shape.ShapeAppearancePathProvider.getInstance
+import java.util.Currency.getInstance
 
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
+
+    private val mContext = application.applicationContext
+    private lateinit var mSharedPreferences: SecurityPreferences
     private val mLoginRepository = LoginRepository()
 
 
@@ -24,7 +29,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             override fun onSucess(model: LoginModel) {
                 super.onSucess(model)
                 mLogin.value = true
-               val s= model.access_token
+                SecurityPreferences(mContext).storeToken("token",model.access_token)
             }
 
             override fun onFailure(toString: String) {

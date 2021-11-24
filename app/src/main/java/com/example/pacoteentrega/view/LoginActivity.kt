@@ -42,6 +42,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     fun observe() {
         mViewModel.login.observe(this, Observer {
             if (it) {
+
                 startActivity(Intent(this, MainActivity::class.java))
 
             } else {
