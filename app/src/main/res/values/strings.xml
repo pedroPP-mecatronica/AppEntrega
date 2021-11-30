@@ -16,4 +16,7 @@
     <string name="entrar">Entrar</string>
     <string name="login_input_layout_erro_codigo_invalido">Código inválido</string>
     <string name="login_input_layout_erro_senha_invalida">Senha inválida</string>
+
+    <string name="drawer_open">Open navigation drawer</string>
+    <string name="drawer_close">Close navigation drawer</string>
 </resources>

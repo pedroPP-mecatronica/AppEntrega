@@ -1,8 +1,7 @@
-package com.example.pacoteentrega.service.models
+package com.example.pacoteentrega.data.source.remote.models.response
 
-import com.google.gson.annotations.SerializedName
 
-class LoginModel {
+class AutenticacaoModel {
     var access_token: String = ""
     var token_type: String = ""
     var expires_in: String = ""

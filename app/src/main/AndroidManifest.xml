@@ -10,7 +10,7 @@
         android:usesCleartextTraffic="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.DrawerActivity">
+        android:theme="@style/Theme.PacoteEntrega">
         <activity android:name=".view.MainActivity"></activity>
         <activity android:name=".view.LoginActivity"
             android:exported="true">

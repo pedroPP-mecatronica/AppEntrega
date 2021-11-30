@@ -1,53 +1,94 @@
 package com.example.pacoteentrega.view
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.pacoteentrega.R
+import com.example.pacoteentrega.data.constants.ConstantsNavigation
 import com.example.pacoteentrega.databinding.ActivityLoginBinding
 import com.example.pacoteentrega.viewmodel.LoginViewModel
-import kotlinx.android.synthetic.*
 
 class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
-    private lateinit var binding: ActivityLoginBinding
+    private var binding: ActivityLoginBinding? = null
     private lateinit var mViewModel: LoginViewModel
+    private var message: String = ConstantsNavigation.DATAERROR.NULL
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLoginBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        binding.loginBtnEnter.setOnClickListener(this)
+        setContentView(binding!!.root)
         mViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+        listenerLogin()
+        observe()
+    }
+
+    private fun listenerLogin() {
+        binding?.loginBtnEnter?.setOnClickListener(this)
+    }
+
+
+    private fun limpaCache() {
+        binding?.loginEditUser?.editText?.text?.clear()
+        binding?.loginEditPassword?.editText?.text?.clear()
+        message = ConstantsNavigation.DATAERROR.NULL
     }
 
     override fun onClick(view: View?) {
-        val id = view?.id
-        if (id == R.id.login_btn_enter) {
-            login()
-            observe()
+        when (view?.id) {
+
+            R.id.login_btn_enter -> enter()
+
         }
     }
 
-    fun login() {
-        val usuario = binding.loginEditUser.editText?.text.toString()
-        val senha = binding.loginEditPassword.editText?.text.toString()
-        mViewModel.autenticacao(usuario, senha)
+    fun enter() {
+        val usuario = binding?.loginEditUser?.editText?.text.toString()
+        val senha = binding?.loginEditPassword?.editText?.text.toString()
+
+        if (validationOK(usuario, senha)) {
+            mViewModel.autenticacao(usuario, senha)
+        } else {
+            Toast.makeText(
+                this,
+                ConstantsNavigation.MENSAGEM_USUARIO.FALTA_DADOS,
+                Toast.LENGTH_SHORT
+            ).show()
+        }
+    }
+
+    private fun exibeErro(mensagem: String) {
+        if (mensagem != ConstantsNavigation.DATAERROR.NULL) {
+            Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    private fun validationOK(usuario: String, senha: String): Boolean {
+        if (usuario != ConstantsNavigation.DATAERROR.NULL && senha != ConstantsNavigation.DATAERROR.NULL)
+            return true
+
+        return false
     }
 
     fun observe() {
         mViewModel.login.observe(this, Observer {
-            if (it) {
-
-                startActivity(Intent(this, MainActivity::class.java))
-
+            if (!it.status() || message != ConstantsNavigation.DATAERROR.NULL) {
+                exibeErro(it.message())
+                limpaCache()
             } else {
-                Toast.makeText(this, "Falha no login", Toast.LENGTH_LONG).show()
+               startActivity(Intent(this,MainActivity::class.java))
+                finish()
             }
         })
+    }
+
+    override fun onDestroy() {
+        binding = null
+        super.onDestroy()
     }
 }

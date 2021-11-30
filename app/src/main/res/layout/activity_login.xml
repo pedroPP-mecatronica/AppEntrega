@@ -26,6 +26,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:hint="@string/usu_rio"
                 android:layout_width="match_parent"
+                android:singleLine="true"
                 android:paddingVertical="27dp"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_input_login"/>
@@ -40,6 +41,7 @@
             <com.google.android.material.textfield.TextInputEditText
                 android:hint="@string/senha"
                 android:inputType="textPassword"
+                android:singleLine="true"
                 android:layout_width="match_parent"
                 android:paddingVertical="27dp"
                 android:layout_height="wrap_content"

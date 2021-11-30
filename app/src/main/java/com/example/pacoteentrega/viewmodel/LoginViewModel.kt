@@ -1,41 +1,49 @@
 package com.example.pacoteentrega.viewmodel
 
 import android.app.Application
-import android.content.SharedPreferences
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.pacoteentrega.service.LoginRepository
-import com.example.pacoteentrega.service.Repository.local.SecurityPreferences
-import com.example.pacoteentrega.service.listener.APIListener
-import com.example.pacoteentrega.service.models.LoginModel
-import com.google.android.material.shape.ShapeAppearancePathProvider.getInstance
-import java.util.Currency.getInstance
+import com.example.pacoteentrega.data.constants.ConstantsNavigation
+import com.example.pacoteentrega.data.source.remote.repositorio.login.LoginRepositorio
+import com.example.pacoteentrega.data.source.local.SecurityPreferences
+import com.example.pacoteentrega.data.source.remote.listener.AutenticacaoListener
+import com.example.pacoteentrega.data.source.remote.listener.ValidationListener
+import com.example.pacoteentrega.data.source.remote.models.response.AutenticacaoModel
 
 
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
 
-    private val mContext = application.applicationContext
-    private lateinit var mSharedPreferences: SecurityPreferences
-    private val mLoginRepository = LoginRepository()
+    private val mSharedPreferences = SecurityPreferences(application)
+    private val mLoginRepository = LoginRepositorio()
 
 
-    private val mLogin = MutableLiveData<Boolean>()
-    val login:LiveData<Boolean> = mLogin
+    private var mLogin = MutableLiveData<ValidationListener>()
+    var login: LiveData<ValidationListener> = mLogin
 
     fun autenticacao(usuario: String, senha: String) {
-        mLoginRepository.login(usuario, senha, object : APIListener {
-            override fun onSucess(model: LoginModel) {
-                super.onSucess(model)
-                mLogin.value = true
-                SecurityPreferences(mContext).storeToken("token",model.access_token)
-            }
 
-            override fun onFailure(toString: String) {
-                super.onFailure(toString)
-                mLogin.value = false
+        mLoginRepository.login(
+            usuario,
+            senha,
+            object : AutenticacaoListener {
+                override fun onSucessToken(model: AutenticacaoModel) {
+                    mSharedPreferences.storeString(
+                        ConstantsNavigation.LOGIN.TOKEN,
+                        model.access_token
+                    )
+                    mSharedPreferences.storeString(
+                        ConstantsNavigation.LOGIN.USUARIO,
+                        usuario
+                    )
+                    mLogin.value = ValidationListener()
+                }
+
+                override fun onFailureToken(message: String) {
+                    mLogin.value = ValidationListener(message)
+                }
             }
-        })
+        )
     }
 }

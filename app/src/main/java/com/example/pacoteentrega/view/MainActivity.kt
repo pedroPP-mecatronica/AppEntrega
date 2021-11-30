@@ -1,37 +1,43 @@
 package com.example.pacoteentrega.view
-import androidx.appcompat.app.AppCompatActivity
+
 import android.os.Bundle
-import android.view.Menu
-import androidx.drawerlayout.widget.DrawerLayout
-import androidx.navigation.ui.AppBarConfiguration
-import com.example.pacoteentrega.R
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.ViewModelProvider
 import com.example.pacoteentrega.databinding.ActivityMainBinding
-import com.google.android.material.snackbar.Snackbar
+import com.example.pacoteentrega.viewmodel.MainActivityViewModel
+import kotlinx.android.synthetic.main.nav_header_main.*
 
 
 class MainActivity : AppCompatActivity() {
-
-    private lateinit var appBarConfiguration: AppBarConfiguration
     private lateinit var binding: ActivityMainBinding
-    private lateinit var drawerLayout: DrawerLayout
+    private lateinit var mViewModel: MainActivityViewModel
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
         setSupportActionBar(binding.appBarMain.toolbar)
 
-        binding.appBarMain.mainBtnScanner.setOnClickListener { view ->
-            Snackbar.make(view, "Scanner Product", Snackbar.LENGTH_LONG).show()
-        }
-
+        mViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        mViewModel.buscardados()
+        observe()
     }
 
-    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        menuInflater.inflate(R.menu.main, menu)
-        return true
+
+    fun observe() {
+        mViewModel.usuario.observe(this, {
+            codigo_usuario.text = it.usuario
+            nome_usuario.text = it.nome
+            filial_usuario.text = it.filial
+        })
+        mViewModel.error.observe(this, {
+            Toast.makeText(this, it, Toast.LENGTH_SHORT).show()
+        })
     }
 
+
+    override fun onBackPressed() {}
 }
