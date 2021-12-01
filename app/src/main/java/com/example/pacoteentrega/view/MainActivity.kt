@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
         setSupportActionBar(binding.appBarMain.toolbar)
 
         mViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
-        mViewModel.buscardados()
+        mViewModel.buscarDados()
         observe()
     }
 

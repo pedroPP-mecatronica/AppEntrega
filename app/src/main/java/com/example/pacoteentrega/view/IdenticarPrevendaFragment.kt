@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.Observer
 import com.example.pacoteentrega.R
 import com.example.pacoteentrega.viewmodel.IdenticarPrevendaViewModel
 
@@ -15,7 +16,8 @@ class IdenticarPrevendaFragment : Fragment() {
         fun newInstance() = IdenticarPrevendaFragment()
     }
 
-    private lateinit var viewModel: IdenticarPrevendaViewModel
+    private lateinit var mViewModel: IdenticarPrevendaViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,7 +28,16 @@ class IdenticarPrevendaFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(IdenticarPrevendaViewModel::class.java)
+        mViewModel = ViewModelProvider(this).get(IdenticarPrevendaViewModel::class.java)
+        observe()
+    }
+
+    private fun observe() {
+        mViewModel.preVenda.observe(viewLifecycleOwner, Observer {
+            it.codigoPrevenda
+            it.valor
+        })
+
     }
 
 }

@@ -2,6 +2,7 @@ package com.example.pacoteentrega.data.source.remote.repositorio.usuario
 
 import com.example.pacoteentrega.data.source.remote.models.request.UsuarioModelResquest
 import com.example.pacoteentrega.data.source.remote.models.response.UsuarioModel
+import com.example.pacoteentrega.data.source.remote.repositorio.Rotas
 import retrofit2.Call
 import retrofit2.http.*
 
@@ -12,10 +13,4 @@ interface UsuarioService {
         @Header("Authorization") authorization : String,
         @Path("urlBase", encoded = true) urlbase: String = Rotas.URL_BASE_PROVEDOR
     ) : Call<UsuarioModel>
-}
-
-class Rotas {
-    companion object {
-        val URL_BASE_PROVEDOR = "http://vendaprovedordados.dev.havan.com.br/"
-    }
 }

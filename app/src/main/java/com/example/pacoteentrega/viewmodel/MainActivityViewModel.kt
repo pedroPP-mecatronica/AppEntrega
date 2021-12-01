@@ -25,7 +25,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     var error: LiveData<String> = mError
 
 
-    fun buscardados() {
+    fun buscarDados() {
         val ipAparelho = "172.17.200.253"
         val usuario = mSharedPreferences.getString(ConstantsNavigation.LOGIN.USUARIO)
         mLoginRepository.usuario(
