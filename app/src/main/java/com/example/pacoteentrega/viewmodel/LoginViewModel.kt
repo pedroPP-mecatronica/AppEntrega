@@ -4,9 +4,9 @@ import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import com.example.pacoteentrega.data.constants.ConstantsNavigation
+import com.example.pacoteentrega.data.constants.Navigation
 import com.example.pacoteentrega.data.source.remote.repositorio.login.LoginRepositorio
-import com.example.pacoteentrega.data.source.local.SecurityPreferences
+import com.example.pacoteentrega.data.source.local.Cache
 import com.example.pacoteentrega.data.source.remote.listener.AutenticacaoListener
 import com.example.pacoteentrega.data.source.remote.listener.ValidationListener
 import com.example.pacoteentrega.data.source.remote.models.response.AutenticacaoModel
@@ -15,7 +15,7 @@ import com.example.pacoteentrega.data.source.remote.models.response.Autenticacao
 class LoginViewModel(application: Application) : AndroidViewModel(application) {
 
 
-    private val mSharedPreferences = SecurityPreferences(application)
+    private val mSharedPreferences = Cache(application)
     private val mLoginRepository = LoginRepositorio()
 
 
@@ -30,11 +30,11 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
             object : AutenticacaoListener {
                 override fun onSucessToken(model: AutenticacaoModel) {
                     mSharedPreferences.storeString(
-                        ConstantsNavigation.LOGIN.TOKEN,
+                        Navigation.LOGIN.TOKEN,
                         model.access_token
                     )
                     mSharedPreferences.storeString(
-                        ConstantsNavigation.LOGIN.USUARIO,
+                        Navigation.LOGIN.USUARIO,
                         usuario
                     )
                     mLogin.value = ValidationListener()
