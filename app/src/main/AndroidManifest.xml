@@ -13,6 +13,9 @@
         android:theme="@style/Theme.PacoteEntrega"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".view.ConfereProdutoActivity"
+            android:exported="false" />
+        <activity
             android:name=".view.BuscarPreVendaActivity"
             android:exported="false" />
         <activity android:name=".view.MainActivity" />

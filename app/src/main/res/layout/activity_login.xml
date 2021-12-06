@@ -24,6 +24,7 @@
             android:layout_height="wrap_content">
 
             <com.google.android.material.textfield.TextInputEditText
+               android:id="@+id/login_editText_user"
                 android:hint="@string/usu_rio"
                 android:layout_width="match_parent"
                 android:singleLine="true"
@@ -39,6 +40,7 @@
             android:layout_marginTop="8dp">
 
             <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/login_editText_password"
                 android:hint="@string/senha"
                 android:inputType="textPassword"
                 android:singleLine="true"

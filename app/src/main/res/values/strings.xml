@@ -19,6 +19,12 @@
 
     <string name="drawer_open">Open navigation drawer</string>
     <string name="drawer_close">Close navigation drawer</string>
-    <string name="pr_venda">Pré-Venda</string>
+    <string name="pr_venda">Código da pré-venda</string>
     <string name="buscar">BUSCAR</string>
+    <string name="codigo_produto">codigo produto</string>
+    <string name="cliente">cliente</string>
+    <string name="nome_do_produto">Nome do produto</string>
+    <string name="quantidade_itens">quantidade_itens</string>
+    <string name="codigo_pre_venda">codigo_pre_venda</string>
+    <string name="codigo_nome_cliente">codigo_nome_cliente</string>
 </resources>

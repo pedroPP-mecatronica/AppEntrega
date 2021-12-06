@@ -16,14 +16,17 @@ class UsuarioRepositorio(application: Application) {
     private var mSharedPreferences = Cache(application)
     private val mRemote = RetrofitClient.createService(UsuarioService::class.java)
 
-    fun usuario(usuario: String, ipAparelho:String, listener: UsuarioListener){
+    fun usuario(usuario: String, ipAparelho: String, listener: UsuarioListener) {
 
         val token = mSharedPreferences.getString(Navigation.LOGIN.TOKEN)
-        val call = mRemote.buscarUsuarioLogin(UsuarioModelResquest(usuario,ipAparelho),token)
+        val call = mRemote.buscarUsuarioLogin(UsuarioModelResquest(usuario, ipAparelho), token)
 
-        call.enqueue(object : Callback<UsuarioModel>{
-            override fun onResponse(call: Call<UsuarioModel>, response: Response<UsuarioModel>) {
-                if (response.code() == Navigation.HTTP.OK) {
+        call.enqueue(object : Callback<UsuarioModel> {
+            override fun onResponse(
+                call: Call<UsuarioModel>,
+                response: Response<UsuarioModel>
+            ) {
+[]                if (response.code() == Navigation.HTTP.OK) {
                     response.body()?.let { listener.onSucessUsuario(it) }
                 } else {
                     listener.onFailureUsuario(response.message())

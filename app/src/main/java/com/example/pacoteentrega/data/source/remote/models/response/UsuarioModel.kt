@@ -1,8 +1,9 @@
 package com.example.pacoteentrega.data.source.remote.models.response
 
 import com.google.gson.annotations.SerializedName
+import java.util.*
 
-class UsuarioModel
+data class UsuarioModel
     (
     @SerializedName("CodigoEmpresa")
     val codigoEmpresa : String,
@@ -17,7 +18,7 @@ class UsuarioModel
     @SerializedName("Codigo")
     val codigo: String,
     @SerializedName("GuidFilial")
-    val guidFilial: String,
+    val guidFilial: UUID,
     @SerializedName("NomeFilial")
     val nomeFilial: String,
     @SerializedName("GuidUsuario")

@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.pacoteentrega.R
 import com.example.pacoteentrega.data.constants.Navigation
@@ -16,7 +15,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
 
     private var binding: ActivityLoginBinding? = null
     private lateinit var mViewModel: LoginViewModel
-    private var message: String = Navigation.DATAERROR.NULL
+    private var message: String = Navigation.DATANULL.NULL
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -24,9 +23,24 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
         binding = ActivityLoginBinding.inflate(layoutInflater)
         setContentView(binding!!.root)
         mViewModel = ViewModelProvider(this).get(LoginViewModel::class.java)
+       // binding?.loginEditTextUser?.addTextChangedListener (watcher)
         listenerLogin()
         observe()
     }
+
+//    private val watcher = object : TextWatcher{
+//        override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
+//            TODO("Not yet implemented")
+//        }
+//
+//        override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+//            TODO("Not yet implemented")
+//        }
+//
+//        override fun afterTextChanged(s: Editable?) {
+//            TODO("Not yet implemented")
+//        }
+//    }
 
     private fun listenerLogin() {
         binding?.loginBtnEnter?.setOnClickListener(this)
@@ -36,7 +50,7 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     private fun limpaCache() {
         binding?.loginEditUser?.editText?.text?.clear()
         binding?.loginEditPassword?.editText?.text?.clear()
-        message = Navigation.DATAERROR.NULL
+        message = Navigation.DATANULL.NULL
     }
 
     override fun onClick(view: View?) {
@@ -50,38 +64,23 @@ class LoginActivity : AppCompatActivity(), View.OnClickListener {
     fun enter() {
         val usuario = binding?.loginEditUser?.editText?.text.toString()
         val senha = binding?.loginEditPassword?.editText?.text.toString()
-
-        if (validationOK(usuario, senha)) {
-            mViewModel.autenticacao(usuario, senha)
-        } else {
-            Toast.makeText(
-                this,
-                Navigation.MENSAGEM_USUARIO.FALTA_DADOS,
-                Toast.LENGTH_SHORT
-            ).show()
-        }
+        mViewModel.autenticacao(usuario, senha)
     }
 
     private fun exibeErro(mensagem: String) {
-        if (mensagem != Navigation.DATAERROR.NULL) {
+        if (mensagem != Navigation.DATANULL.NULL) {
             Toast.makeText(this, mensagem, Toast.LENGTH_SHORT).show()
         }
     }
 
-    private fun validationOK(usuario: String, senha: String): Boolean {
-        if (usuario != Navigation.DATAERROR.NULL && senha != Navigation.DATAERROR.NULL)
-            return true
-
-        return false
-    }
 
     fun observe() {
-        mViewModel.login.observe(this, Observer {
-            if (!it.status() || message != Navigation.DATAERROR.NULL) {
+        mViewModel.login.observe(this, {
+            if (!it.status() || message != Navigation.DATANULL.NULL) {
                 exibeErro(it.message())
                 limpaCache()
             } else {
-               startActivity(Intent(this,MainActivity::class.java))
+                startActivity(Intent(this, MainActivity::class.java))
                 finish()
             }
         })

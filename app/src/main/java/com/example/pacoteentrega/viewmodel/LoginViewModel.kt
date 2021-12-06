@@ -33,10 +33,7 @@ class LoginViewModel(application: Application) : AndroidViewModel(application) {
                         Navigation.LOGIN.TOKEN,
                         model.access_token
                     )
-                    mSharedPreferences.storeString(
-                        Navigation.LOGIN.USUARIO,
-                        usuario
-                    )
+                    mSharedPreferences.storeString(Navigation.LOGIN.USUARIO, usuario)
                     mLogin.value = ValidationListener()
                 }
 

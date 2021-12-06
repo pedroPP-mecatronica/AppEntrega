@@ -5,7 +5,9 @@ class Navigation private constructor() {
     object LOGIN{
         const val TOKEN = "token"
         const val USUARIO = "usuario"
-        const val DADOS_USUARIO ="dados"
+    }
+    object USUARIO{
+        const val DADOS_USUARIO = "dados"
     }
 
     object MENSAGEM_USUARIO {
@@ -21,8 +23,14 @@ class Navigation private constructor() {
         const val DADO_INVALIDO = 400
     }
 
-    object DATAERROR{
+    object DATANULL{
         const val NULL = ""
+    }
+
+    object PREVENDA{
+        const val PRE_VENDA = "prevenda"
+        const val ITENS = "itens"
+        const val CLIENTE = "cliente"
     }
 
 

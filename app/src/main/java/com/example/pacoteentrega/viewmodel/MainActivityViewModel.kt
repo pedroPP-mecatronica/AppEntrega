@@ -40,7 +40,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
                         model.codigoEmpresa,
                         model.codigoFilial
                     )
-                    mSharedPreferences.storeDadosCache(Navigation.LOGIN.DADOS_USUARIO,dadosUsuario)
+                    mSharedPreferences.storeDadosCache(Navigation.USUARIO.DADOS_USUARIO,dadosUsuario)
                     mUsuario.value =
                         DadosUsuarioModel(
                             model.codigo,

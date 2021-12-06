@@ -12,7 +12,7 @@ import com.example.pacoteentrega.viewmodel.MainActivityViewModel
 import kotlinx.android.synthetic.main.nav_header_main.*
 
 
-class MainActivity : AppCompatActivity(),View.OnClickListener {
+class MainActivity : AppCompatActivity(), View.OnClickListener {
     private lateinit var binding: ActivityMainBinding
     private lateinit var mViewModel: MainActivityViewModel
 
@@ -44,8 +44,8 @@ class MainActivity : AppCompatActivity(),View.OnClickListener {
     }
 
     override fun onClick(v: View?) {
-        when(v?.id){
-            R.id.venda_normal -> startActivity(Intent(this,BuscarPreVendaActivity::class.java))
+        when (v?.id) {
+            R.id.venda_normal -> startActivity(Intent(this, BuscarPreVendaActivity::class.java))
         }
     }
 

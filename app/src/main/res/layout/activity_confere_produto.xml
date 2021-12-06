@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".view.ConfereProdutoActivity">
+
+    <EditText
+        android:id="@+id/codigo_produto"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/codigo_produto"
+        android:paddingVertical="25dp"
+        app:layout_constraintEnd_toStartOf="@id/confere_produto_scaneer"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/confere_produto_scaneer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/ic_baseline_qr_code_scanner_24"
+        app:layout_constraintBottom_toBottomOf="@+id/codigo_produto"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/codigo_produto" />
+
+    <LinearLayout
+        android:id="@+id/dados_prevenda"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="vertical"
+        android:background="@drawable/bg_dados_pre_prevenda"
+        android:padding="40dp"
+        app:layout_constraintTop_toBottomOf="@id/codigo_produto">
+
+        <TextView
+            android:id="@+id/codigo_pre_venda"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_margin="4dp"
+            android:layout_height="wrap_content"
+            android:text="@string/codigo_pre_venda" />
+
+        <TextView
+            android:id="@+id/nome_cliente"
+            android:layout_width="wrap_content"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            android:layout_margin="4dp"
+            android:layout_height="wrap_content"
+            android:text="@string/codigo_nome_cliente" />
+    </LinearLayout>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/dados_prevenda">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/confere_produto_recyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/lista_conferir_produtos" />
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
